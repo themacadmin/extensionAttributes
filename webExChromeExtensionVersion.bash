@@ -12,7 +12,7 @@ fi
 # Determine if there is more than one instance of the WebEx Extension
 numberOfWebExExtensions=$(echo $webExExtensionPath | awk 'END{print FNR}')
 if [ $numberOfWebExExtensions -gt 1 ] ; then
-		echo "<result>Multiple Versions Present</result>"
+		echo "<result>Multiple Instances Present</result>"
 		## FUTURE STATE BELOW
 		## Determine versions of each
 		## Determine oldest version present
