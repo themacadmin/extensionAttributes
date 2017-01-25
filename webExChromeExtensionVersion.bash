@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # Find instances of WebEx Extension
 webExExtensionPath=$( find / -type d -iname jlhmfgmfgeifomenelglieieghnjghma )
 
