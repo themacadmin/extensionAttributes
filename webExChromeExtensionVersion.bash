@@ -10,7 +10,7 @@ if [ -z "$webExExtensionPath" ] ; then
 fi
 
 # Determine if there is more than one instance of the WebEx Extension
-numberOfWebExExtensions=$(echo $chromeext | awk 'END{print FNR}')
+numberOfWebExExtensions=$(echo $webExExtensionPath | awk 'END{print FNR}')
 if [ $numberOfWebExExtensions -gt 1 ] ; then
 		## Determine versions of each
 		## Determine oldest version present
