@@ -20,7 +20,7 @@ if [ $numberOfWebExExtensions -gt 1 ] ; then
 		exit 0
 	else
 		# If only one instance of Extension, value is extension version.
-		singleWebExVersion=$(ls "$webExExtensionPath")
+		singleWebExVersion=$(ls -t "$webExExtensionPath" | head -n1)
 		echo "<result>$singleWebExVersion</result>"
 		
 fi
