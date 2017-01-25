@@ -14,10 +14,12 @@ numberOfWebExExtensions=$(echo $webExExtensionPath | awk 'END{print FNR}')
 if [ $numberOfWebExExtensions -gt 1 ] ; then
 		## Determine versions of each
 		## Determine oldest version present
-		## Value is "Multiple instances of WebEx extension present. Oldest is "$oldestWebExExtensionVersion"
+		## Value is "Multiple instances of WebEx extension present. The oldest version is "$oldestWebExExtensionVersion"
 		exit 0
 	else
 		# If only one instance of Extension, value is extension version.
+		singleWebExVersion=$(ls "$webExExtensionPath")
+		echo "<result>$singleWebExVersion</result>"
 		
 fi
 
