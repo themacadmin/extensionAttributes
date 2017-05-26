@@ -9,7 +9,7 @@ domain=$( dsconfigad -show|grep "Active Directory Domain"|awk {'print $5'}|sed '
 
 moddate=$( security find-generic-password -l "/Active Directory/$domain"|grep cdat|awk '{print $2}'|sed 's/\"//g' |cut -c 1-8 )
 
-formatteddate=$( date -f %Y%m%d $moddate +%Y-%m-%d )
+formatteddate=$( date -j -f %Y%m%d $moddate +%Y-%m-%d )
 
 if [[ $formatteddate =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}$ ]]
   then echo "<result>$formatteddate</result>"
