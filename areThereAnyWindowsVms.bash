@@ -9,7 +9,9 @@ OLDIFS=$IFS
 IFS=$'\n'
 
 for vmInfoFile in $( find / \( -name "*.vmx" -o -name "*.pvi" -o -name "*.vbox" \) ); do
-	if [[ $vmInfoFile == *".pvi"* ]]; then
+	if [[ $vmInfoFile == *".mpkg"* ]] || [[ $vmInfoFile == *"/Applications/"* ]]; then
+		continue
+	elif [[ $vmInfoFile == *".pvi"* ]]; then
 		# Check Parallels .pvi file for indows
   		vmGuestOS=$( xpath "$vmInfoFile" /VmInfo/GuestOsInformation/RealOsType | awk '{gsub(/<[^>]*>/,"")};1' | awk -F '[,]' '{print $1}' )
   		if [[ $vmGuestOS == *"indows"* ]]; then
