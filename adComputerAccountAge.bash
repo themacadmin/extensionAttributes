@@ -7,7 +7,7 @@
 
 domain=$( dsconfigad -show|grep "Active Directory Domain"|awk {'print $5'}|sed 's/\..*//'|tr '[:lower:]' '[:upper:]' )
 
-moddate=$( security find-generic-password -l "/Active Directory/$domain"|grep cdat|awk '{print $2}'|sed 's/\"//g' |cut -c 1-8 )
+moddate=$( security find-generic-password -l "/Active Directory/$domain"|grep mdat|awk '{print $2}'|sed 's/\"//g' |cut -c 1-8 )
 
 formatteddate=$( date -j -f %Y%m%d $moddate +%Y-%m-%d )
 
