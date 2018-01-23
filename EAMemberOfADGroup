@@ -1,0 +1,22 @@
+#!/bin/sh
+
+# Is the user assigned to this computer a member of a given AD group or groups.
+# In this example, the target groups are "ADGroupX" and "ADGroupY"
+
+serialNumber=$(system_profiler SPHardwareDataType | grep 'Serial Number (system)' | awk '{print $NF}')
+
+response=$(curl -v -k -u apiComputerReadUsername:apiComputerReadPassword -H "Accept: application/xml" -H "Content-Type: application/xml" https://JamfProUrl/JSSResource/computers/serialnumber/$serialNumber)
+
+assignedUser=$(echo $response | xpath '/computer/location/username/text()' 2>/dev/null)
+
+domain=$(dscl /Active\ Directory/ -read . | grep SubNodes | sed 's|SubNodes: ||g')
+
+membership=$(dscl /Active\ Directory/"$domain"/All\ Domains read /Users/$assignedUser dsAttrTypeNative:memberOf | egrep 'ADGroupX|ADGroupY')
+
+    if [[ "$membership" == "" ]]; then
+        echo "<result>No</result>"
+    else
+        echo "<result>Yes</result>"
+    fi
+
+exit 0
