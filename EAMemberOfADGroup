@@ -3,7 +3,7 @@
 # Is the user assigned to this computer a member of a given AD group or groups.
 # In this example, the target groups are "ADGroupX" and "ADGroupY"
 
-serialNumber=$(system_profiler SPHardwareDataType | grep 'Serial Number (system)' | awk '{print $NF}')
+serialNumber=$(ioreg -l | awk -F'"' '/IOPlatformSerialNumber/ { print $4;}')
 
 response=$(curl -v -k -u apiComputerReadUsername:apiComputerReadPassword -H "Accept: application/xml" -H "Content-Type: application/xml" https://JamfProUrl/JSSResource/computers/serialnumber/$serialNumber)
 
